@@ -17,11 +17,13 @@
     
 
     
-    <script>
+    <script type="text/babel">
 
       // ==== Código
-
-
+      const divRoot = document.querySelector('#root');
+      const name = 'Robert Antony';
+      const label = <h1> Hi, I am {name}</h1>;
+      ReactDOM.render(label, divRoot);
 
 
 
