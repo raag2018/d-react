@@ -4,7 +4,7 @@ import './App.css';
 //import {heroes} from './data/heroes'
 import heroes from './data/heroes'
 import {impHeroe} from './data/impHeroes'
-
+const axios = require('axios');
 function App() {
   const nombre = "Roberto Antonio";
   const apellido = "Alferes Gomez";
@@ -99,7 +99,8 @@ function App() {
 //ThU1gHPvmVAldDbo73PJSDj19O1M2F0d
 //api.giphy.com/v1/gifs/random?api_key=ThU1gHPvmVAldDbo73PJSDj19O1M2F0d
   const apiKey = 'ThU1gHPvmVAldDbo73PJSDj19O1M2F0d';
-  const peticion = fetch(`api.giphy.com/v1/gifs/random?api_key= ${apellido}`);
+  //console.log(`api.giphy.com/v1/gifs/random?api_key=${apiKey}`);
+  const peticion = fetch(`http://api.giphy.com/v1/gifs/random?api_key=ThU1gHPvmVAldDbo73PJSDj19O1M2F0d`);
   peticion
   .then((resp) => resp.json())
   .then(({data}) => {
@@ -107,7 +108,7 @@ function App() {
     const {url} = data.images.original;
     const img = document.createElement('img');
     img.src = url;
-    document.body(img);
+    document.body.appendChild(img);
   })  
   .catch(console.warn);
   return (
