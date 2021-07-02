@@ -76,7 +76,7 @@ function App() {
   const getHeroeAsync = (id) => {
     const promesa = new Promise((resolve, reject) => {
       setTimeout(() => {
-        console.log('Termina en 2 seg...');
+        //console.log('Termina en 2 seg...');
         //resolve();
         const heroe1 = impHeroe(id);
         //resolve(heroe1);
@@ -85,32 +85,54 @@ function App() {
         }else{
           reject('No se encontro el heroe');
         }
-      }, 2000);
+      }, 1000);
     });
     return promesa;
   }
-  getHeroeAsync(0)
+  getHeroeAsync(1)
   .then( (heroe1) => {
     //console.log('then la promesa');
     //console.log('Heroe: ',heroe1);
   })
   .catch(err => console.warn(err));
-  console.clear();
-//ThU1gHPvmVAldDbo73PJSDj19O1M2F0d
-//api.giphy.com/v1/gifs/random?api_key=ThU1gHPvmVAldDbo73PJSDj19O1M2F0d
-  const apiKey = 'ThU1gHPvmVAldDbo73PJSDj19O1M2F0d';
+
+
+  const apiKey = process.env.REACT_APP_GLAPHY_KEY;
+  let url = 'http://api.giphy.com/v1/gifs/random';
+  let baseUrl = url + `?api_key=` + apiKey + '&limit=1';
   //console.log(`api.giphy.com/v1/gifs/random?api_key=${apiKey}`);
-  const peticion = fetch(`http://api.giphy.com/v1/gifs/random?api_key=ThU1gHPvmVAldDbo73PJSDj19O1M2F0d`);
+  const peticion = fetch(baseUrl);
   peticion
   .then((resp) => resp.json())
   .then(({data}) => {
     //console.log(data.images.original.url);
     const {url} = data.images.original;
+    console.log(url);
     const img = document.createElement('img');
-    img.src = url;
-    document.body.appendChild(img);
+    if (url !== '' && url.length > 5){
+      img.src = url;
+      img.style.height = '100px';
+      img.style.width = '200px';  
+      document.body.appendChild(img);
+    } 
   })  
   .catch(console.warn);
+  /**********  ASYNC AWAIT  ************/
+  /*utilizando async*/
+  const getImage = async() => {
+    const respuesta = await fetch(baseUrl);
+    const {data} = await respuesta.json();
+    const urlAsync = data.images.original;
+    const imgAsc = document.createElement('img');
+    if (urlAsync !== '' && urlAsync.length > 5 ){
+      imgAsc.src = urlAsync;
+      imgAsc.style.height = '100px';
+      imgAsc.style.width = '200px';  
+      document.body.appendChild(imgAsc);
+    } 
+  }
+  getImage();
+  console.log(process.env.GLAPHY_KEY);
   return (
     <div className="App">
       <header className="App-header">
@@ -126,7 +148,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
+          Aprender React
         </a>
       </header>
     </div>
