@@ -1,10 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-//importar heroes de ./data/heroes.js
-//import {heroes} from './data/heroes'
-import heroes from './data/heroes'
-import {impHeroe} from './data/impHeroes'
-const axios = require('axios');
+
 function App() {
   const nombre = "Roberto Antonio";
   const apellido = "Alferes Gomez";
