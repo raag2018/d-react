@@ -1,6 +1,6 @@
 import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
-const primeraApp = ({value}) => {
+const counterApp = ({value}) => {
 	return( 
 			<>
 				<h1>CounterApp</h1>
@@ -12,4 +12,4 @@ const primeraApp = ({value}) => {
 primeraApp.propTypes = {
 	value: PropTypes.number.isRequired
 }
-export default primeraApp;
+export default counterApp;
